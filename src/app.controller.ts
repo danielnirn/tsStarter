@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Contract, Result, DataDto, RetType } from './model';
-import * as appService from 'app.service'
+import * as appService from './app.service'
 
 
 @Controller()

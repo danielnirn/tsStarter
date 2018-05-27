@@ -122,7 +122,7 @@ export const data = {
     {
       footprint: MultiPolygon;
       id: string;
-      colorType: string;
+      colorType?: string;
       sensorType: string;
       sensorName: string;
       imageUrl: string;

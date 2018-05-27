@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mssql_1 = require("mssql");
+const model_1 = require("./model");
 const config = {
     user: 'ig2',
     password: 'ig2test',
@@ -18,11 +19,14 @@ const config = {
 function getFromDb() {
     return __awaiter(this, void 0, void 0, function* () {
         const pool = new mssql_1.ConnectionPool(config);
-        const sql = 'SELECt TOP 5 b.id,c.IS_STEREO as isStereo,  a.LOS_ROLL_ANGLE as roll,a.LOS_HEADING_ANGLE as azimuth FROM dbo.FRAME_SOLUTIONS a , dbo.IMAGES b ' +
+        const join = 'SELECT TOP 5 d.GEO_LOCATION as footprint,d.SOLUTION_CSMBLOB as csm, b.id,b.CREATION_TIME as photoTime,c.MRL as imageUrl, c.IS_STEREO as isStereo,  a.LOS_ROLL_ANGLE as roll,a.LOS_HEADING_ANGLE as azimuth ' +
+            'FROM dbo.FRAME_SOLUTIONS a , dbo.IMAGES b ' +
             'inner join dbo.FRAMES c on c.PERSISTENT_ID = b.PERSISTENT_ID ' +
+            'inner join dbo.IMAGERY_SOLUTIONS d on b.CURRENT_SOLUTION_ID = d.PERSISTENT_ID ' +
             'where a.PERSISTENT_ID = b.CURRENT_SOLUTION_ID';
         yield pool.connect();
-        const result = yield pool.request().query(sql);
+        const result = yield pool.request().query(join);
+        const testt = new model_1.RetType();
         pool.close();
         return result.recordset;
     });

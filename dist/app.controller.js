@@ -23,7 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const model_1 = require("./model");
-const appService = require("app.service");
+const appService = require("./app.service");
 let AppController = class AppController {
     constructor() {
         this.config = {
