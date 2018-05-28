@@ -29,18 +29,24 @@ export async function getFromDb() {
 
     const result = await pool.request().query(join);
     
-    const testt:RetType = new RetType();
+    const resMapped:RetType = new RetType();
 
-    // const polygons = result.recordset.map<RetType>(obj => ({
+    const polygons = result.recordset.map<RetType>(obj => ({
+      footprint: {
+        type: "MultiPolygon",
+        coordinates: [[obj.footprint.points.map(p => [p.x, p.y])]]
+      },
+      csm: obj.csm,
+      id: obj.id,
+      roll: obj.roll,
+      azimuth: obj.azimuth,
+      photoTime: obj.photoTime,
+      imageUrl: obj.imageUrl,
+      isStereo: obj.isStereo
+    }))
 
-    //   footprint: {
-    //     type: "MultiPolygon",
-    //     coordinates: [[[obj.footprint.points.map(p => [p.x, p.y])]]]
-    //   }
-    // }))
-
-    // testt.footprint.coordinates
+    // resMapped.footprint.coordinates
     pool.close();
 
-    return result.recordset;
+    return polygons;
   }

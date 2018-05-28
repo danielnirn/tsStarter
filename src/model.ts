@@ -123,18 +123,18 @@ export const data = {
       footprint: MultiPolygon;
       id: string;
       colorType?: string;
-      sensorType: string;
-      sensorName: string;
+      sensorType?: string;
+      sensorName?: string;
       imageUrl: string;
       photoTime: string;
-      endPhotoTime: null;
+      endPhotoTime?: null;
       isStereo: boolean;
-      bestResolution: number;
-      approximateTransform: string;
+      bestResolution?: number;
+      approximateTransform?: string;
       azimuth: number;
       roll: number;
-      stereoType: number;
-      isCsmCached: boolean;
+      stereoType?: number;
+      isCsmCached?: boolean;
       csm: string
 
     };
