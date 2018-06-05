@@ -124,7 +124,7 @@ export const data = {
       id: string;
       colorType?: string;
       sensorType?: string;
-      sensorName?: string;
+      sensorName: string;
       imageUrl: string;
       photoTime: string;
       endPhotoTime?: null;
@@ -145,6 +145,11 @@ export const data = {
       id:string;
       name: string;
   }
+
+
+  export class IdLists{
+    ids : Array<string>
+  };
 
   export class DataDto{
     @IsString()

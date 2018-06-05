@@ -45,7 +45,17 @@ let AppController = class AppController {
         });
     }
     mock(params) {
-        return appService.getFromDb();
+        if (+params.paginationInfo.from > 0) {
+            return new Array();
+        }
+        else {
+            return appService.getFromDb();
+        }
+    }
+    getByIds(params) {
+        if (params.ids.length > 0) {
+            return appService.getIdFromDb(params.ids);
+        }
     }
 };
 __decorate([
@@ -70,6 +80,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "mock", null);
+__decorate([
+    common_1.Post('/api/Overlays'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [model_1.IdLists]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "getByIds", null);
 AppController = __decorate([
     common_1.Controller(),
     swagger_1.ApiUseTags('Our awesome')

@@ -8,7 +8,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiUseTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { Contract, Result, DataDto, RetType } from './model';
+import { Contract, Result, DataDto, RetType, IdLists } from './model';
 import * as appService from './app.service'
 
 
@@ -43,9 +43,21 @@ export class AppController {
 
   @Post('/mock')
   mock(@Body() params: Contract) {
-  
-    return appService.getFromDb();
+    if(+params.paginationInfo.from > 0)
+      {
+        return new Array<RetType>();
+      }
+    else
+      {
+        return appService.getFromDb();
+      }
   }
 
+  @Post('/api/Overlays')
+  getByIds(@Body() params: IdLists){
+    if(params.ids.length > 0){
+      return appService.getIdFromDb(params.ids);
+    }
+  }
 
 }

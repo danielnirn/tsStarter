@@ -1,11 +1,13 @@
 
 
-POST http://localhost:3000/mutation
+POST http://localhost:3000/api/Overlays
 Content-Type: application/json
 
 {
-  "id":"kuku",
-  "age":5
+  "ids": [
+    "1e0507e0-1706-a834-1a22-976f88d83a3d_20fa76e3-7d0b-8bb9-cc4d-4304558da497",
+    "00"
+  ]
 }
 
 ###

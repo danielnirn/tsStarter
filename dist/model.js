@@ -130,6 +130,10 @@ class RetType {
 }
 exports.RetType = RetType;
 ;
+class IdLists {
+}
+exports.IdLists = IdLists;
+;
 class DataDto {
 }
 __decorate([
